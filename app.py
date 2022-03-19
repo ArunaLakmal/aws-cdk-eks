@@ -4,10 +4,11 @@ import os
 import aws_cdk as cdk
 
 from aws_env.aws_env_stack import AwsEnvStack
+from aws_env.tc_cdk_eks_stack import TcCdkEksStack
 
 
 app = cdk.App()
-AwsEnvStack(app, "AwsEnvStack",
+infra = AwsEnvStack(app, "AwsEnvStack",
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.
@@ -24,5 +25,6 @@ AwsEnvStack(app, "AwsEnvStack",
 
     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
     )
+eksStack = TcCdkEksStack(app, "TcCdkEksStack", vpc=infra.main_vpc)
 
 app.synth()

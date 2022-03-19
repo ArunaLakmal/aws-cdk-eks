@@ -20,4 +20,10 @@ class AwsEnvStack(Stack):
             ec2.SubnetConfiguration(cidr_mask=24,subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT,name="Private")],
             nat_gateways=2
         )
+
+        self._vpc = vpc
         CfnOutput(self, "Output", value=vpc.vpc_id)
+        
+    @property
+    def main_vpc(self) -> ec2.IVpc:
+        return self._vpc
