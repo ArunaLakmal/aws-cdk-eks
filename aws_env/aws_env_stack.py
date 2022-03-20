@@ -21,10 +21,8 @@ class AwsEnvStack(Stack):
             nat_gateways=2
         )
 
-        # self._vpc = vpc
         CfnOutput(self, "Output", value=self.vpc.vpc_id)
         
     @property
     def main_vpc(self) -> ec2.IVpc:
-        # return self._vpc
         return self.vpc
