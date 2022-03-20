@@ -17,6 +17,7 @@ class TcCdkEksStack(Stack):
 
         cluster = eks.Cluster(self, "TCCDKEKS",
             version=eks.KubernetesVersion.V1_21,
+            cluster_name="TCCDKEKSUSEAST1-01",
             default_capacity=3,
             vpc=vpc,
             default_capacity_instance=ec2.InstanceType("t3.medium")
