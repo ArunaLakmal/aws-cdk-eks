@@ -12,7 +12,7 @@ class AwsEnvStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        vpc = ec2.Vpc(self, "TCVPC",
+        self.vpc = ec2.Vpc(self, "TCVPC",
             vpc_name="TCVPC",
             cidr="172.16.0.0/16",
             max_azs=2,
@@ -21,9 +21,10 @@ class AwsEnvStack(Stack):
             nat_gateways=2
         )
 
-        self._vpc = vpc
-        CfnOutput(self, "Output", value=vpc.vpc_id)
+        # self._vpc = vpc
+        CfnOutput(self, "Output", value=self.vpc.vpc_id)
         
     @property
     def main_vpc(self) -> ec2.IVpc:
-        return self._vpc
+        # return self._vpc
+        return self.vpc
