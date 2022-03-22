@@ -25,3 +25,51 @@ class TcCdkEksStack(Stack):
 
         admin_user = iam.User.from_user_attributes(self, "eks_test", user_arn="arn:aws:iam::123456789:user/eks_test")
         cluster.aws_auth.add_user_mapping(admin_user, groups=["system:masters"])
+
+        nodegroup = eks.Nodegroup(self, "MyNodegroup",
+            cluster=cluster,
+
+            # the properties below are optional
+            desired_size=3,
+            disk_size=50,
+            force_update=False,
+            instance_type=t3.medium,
+            instance_types=[t3.medium, t2.large],
+            labels={
+                "ManagedNG": "true"
+            },
+            launch_template_spec=eks.LaunchTemplateSpec(
+                id="id",
+
+                # the properties below are optional
+                version="version"
+            ),
+            max_size=5,
+            min_size=3,
+            nodegroup_name="TCMANAGEDNG-01",
+            node_role=role,
+            # release_version="releaseVersion",
+            # remote_access=eks.NodegroupRemoteAccess(
+            #     ssh_key_name="sshKeyName",
+
+            #     # the properties below are optional
+            #     source_security_groups=[security_group]
+            # ),
+            subnets=ec2.SubnetSelection(
+                availability_zones=["availabilityZones"],
+                one_per_az=False,
+                # subnet_filters=[subnet_filter],
+                # subnet_group_name="subnetGroupName",
+                subnet_name="Private",
+                # subnets=[subnet],
+                subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
+            ),
+            tags={
+                "ng_key": "TCMANAGEDNG-01"
+            },
+            taints=[eks.TaintSpec(
+                effect=eks.TaintEffect.NO_SCHEDULE,
+                key="NGNAME",
+                value="TCMANAGEDNG-01"
+            )]
+        )
