@@ -47,7 +47,7 @@ class TcCdkEksStack(Stack):
             max_size=5,
             min_size=3,
             nodegroup_name="TCMANAGEDNG-01",
-            node_role=role,
+            node_role="role",
             # release_version="releaseVersion",
             # remote_access=eks.NodegroupRemoteAccess(
             #     ssh_key_name="sshKeyName",
