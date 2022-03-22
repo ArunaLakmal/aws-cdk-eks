@@ -31,14 +31,13 @@ class TcCdkEksStack(Stack):
 
             # the properties below are optional
             desired_size=3,
-            disk_size=50,
             force_update=False,
             instance_types=[ec2.InstanceType("t3.medium")],
             labels={
                 "ManagedNG": "true"
             },
             launch_template_spec=eks.LaunchTemplateSpec(
-                id="id",
+                disk_size=50,
 
                 # the properties below are optional
                 version="version"
