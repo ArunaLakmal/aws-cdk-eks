@@ -33,7 +33,7 @@ class TcCdkEksStack(Stack):
             desired_size=3,
             disk_size=50,
             force_update=False,
-            instance_types=["t3.medium"],
+            instance_types=[ec2.InstanceType("t3.medium")],
             labels={
                 "ManagedNG": "true"
             },
