@@ -60,7 +60,7 @@ class TcCdkEksStack(Stack):
                 one_per_az=False,
                 # subnet_filters=[subnet_filter],
                 # subnet_group_name="subnetGroupName",
-                subnet_name="Private",
+                # subnet_name="Private", (this didn't work)
                 # subnets=[subnet],
                 subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
             ),
