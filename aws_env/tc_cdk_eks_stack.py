@@ -31,17 +31,18 @@ class TcCdkEksStack(Stack):
 
             # the properties below are optional
             desired_size=3,
+            disk_size=50,
             force_update=False,
             instance_types=[ec2.InstanceType("t3.medium")],
             labels={
                 "ManagedNG": "true"
             },
-            launch_template_spec=eks.LaunchTemplateSpec(
-                disk_size=50,
+            # launch_template_spec=eks.LaunchTemplateSpec(
+            #     id="id",
 
-                # the properties below are optional
-                version="version"
-            ),
+            #     # the properties below are optional
+            #     version="version"
+            # ),
             max_size=5,
             min_size=3,
             nodegroup_name="TCMANAGEDNG-01",
