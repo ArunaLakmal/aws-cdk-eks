@@ -60,8 +60,10 @@ class TcCdkEksStack(Stack):
                 # subnet_filters=[subnet_filter],
                 # subnet_group_name="subnetGroupName",
                 # subnet_name="Private", (this didn't work)
-                # subnets=[subnet],
-                subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
+                subnets=[ec2.SubnetSelection(
+                    subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
+                )],
+                # subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
             ),
             tags={
                 "ng_key": "TCMANAGEDNG-01"
