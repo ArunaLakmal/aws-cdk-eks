@@ -55,15 +55,15 @@ class TcCdkEksStack(Stack):
             #     source_security_groups=[security_group]
             # ),
             subnets=ec2.SubnetSelection(
-                availability_zones=["availabilityZones"],
-                one_per_az=False,
+                # availability_zones=["availabilityZones"],
+                one_per_az=True,
                 # subnet_filters=[subnet_filter],
                 # subnet_group_name="subnetGroupName",
                 # subnet_name="Private", (this didn't work)
-                subnets=[ec2.SubnetSelection(
-                    subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
-                )],
-                # subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
+                # subnets=[ec2.SubnetSelection(
+                #     subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
+                # )],
+                subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
             ),
             tags={
                 "ng_key": "TCMANAGEDNG-01"
